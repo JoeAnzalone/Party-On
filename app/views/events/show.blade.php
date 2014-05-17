@@ -14,9 +14,9 @@
 @if (!empty($guest['key']))
     <h2>Your current response: <strong>{{ $guest['response'] }}</strong></h2>
     Change it here:
-    {{ HTML::linkAction('GuestsController@editResponse', 'Yes', [$guest['key'], 'yes']) }} /
-    {{ HTML::linkAction('GuestsController@editResponse', 'No', [$guest['key'], 'no']) }} /
-    {{ HTML::linkAction('GuestsController@editResponse', 'Maybe', [$guest['key'], 'maybe']) }}
+    {{ link_to_route('guest.edit_response', 'Yes', [$guest['key'], 'yes']) }} /
+    {{ link_to_route('guest.edit_response', 'No', [$guest['key'], 'no']) }} /
+    {{ link_to_route('guest.edit_response', 'Maybe', [$guest['key'], 'maybe']) }}
 @endif
 
 @if (!empty($event->guests))
