@@ -1,6 +1,6 @@
 <h1>{{ $event['title'] }}</h1>
 
-<div class="description">{{ $event['description'] }}</div>
+<div class="description">{{ $event->description_html }}</div>
 
 <h2>Location</h2>
 <div class="location">{{ $event['location'] }}</div>

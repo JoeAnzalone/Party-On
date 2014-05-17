@@ -83,7 +83,8 @@ class EventsController extends \BaseController {
      */
     public function edit($id)
     {
-        //
+        $event = Event::find($id);
+        $this->layout->content = View::make('events.edit', ['event' => $event]);
     }
 
     /**

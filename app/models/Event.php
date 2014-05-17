@@ -4,6 +4,7 @@ use \Michelf\Markdown;
 
 class Event extends \Eloquent {
     protected $fillable = ['title', 'description', 'location', 'start_time', 'end_time'];
+    protected $appends  = ['description_html'];
 
     public function __construct($params = [])
     {
@@ -36,9 +37,9 @@ class Event extends \Eloquent {
 
     }
 
-    public function getDescriptionAttribute($description)
+    public function getDescriptionHtmlAttribute()
     {
-        return Markdown::defaultTransform($description);
+        return Markdown::defaultTransform($this->description);
     }
 
     public function getNiceStartTimeAttribute()
@@ -49,5 +50,15 @@ class Event extends \Eloquent {
     public function getNiceEndTimeAttribute()
     {
         return date('l F jS, Y @ g:ia', time($this->end_time));
+    }
+
+    public function getStartTimeDateAttribute()
+    {
+        return date('Y-m-d', time($this->start_time));
+    }
+
+    public function getStartTimeTimeAttribute()
+    {
+        return date('H:i:s', time($this->start_time));
     }
 }
