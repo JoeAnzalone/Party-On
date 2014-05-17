@@ -25,9 +25,9 @@
         @foreach ($event['guests'] as $guest)
             <li>
                 @if (!empty($guest->key))
-                    {{ link_to_route('event.showbykey', $guest->name, $guest->key) }}
+                    {{ link_to_route('event.showbykey', $guest->name, $guest->key) }} - {{ $guest->response }}
                 @else
-                    {{ $guest->name }}
+                    {{ $guest->name }} - {{ $guest->response }}
                 @endif
             </li>
         @endforeach
