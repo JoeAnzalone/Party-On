@@ -70,7 +70,10 @@ class GuestsController extends \BaseController {
         $guest = Guest::where('key', $key)->firstOrFail();
         $guest->response = $response;
         $guest->save();
-        return Redirect::to(route('event.showbykey', $guest->key));
+        return Redirect::to(route('event.showbykey', $guest->key))->with(
+            'flash',
+            ['class' => 'success', 'message' => "You've successfully RSVP'd <strong>$response</strong>!"]
+        );
     }
 
     /**
