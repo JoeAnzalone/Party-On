@@ -1,0 +1,1 @@
+/Users/joe/Dropbox/www/party-on/app/views/events/show.blade.php
