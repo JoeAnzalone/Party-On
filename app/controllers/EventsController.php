@@ -15,7 +15,15 @@ class EventsController extends \BaseController {
 
     public function currentUser()
     {
-        $events = Event::where('user_id', Sentry::getUser()->id)->get();
+        try {
+            $events = Event::where('user_id', Sentry::getUser()->id)->get();
+        } catch (Exception $e) {
+            return Redirect::to(route('user.show_login'))->with(
+                'flash',
+                ['class' => 'success', 'message' => 'You must be logged in to do that.']
+            );
+        }
+
         $this->layout->content = View::make('events.index', ['events' => $events]);
     }
 

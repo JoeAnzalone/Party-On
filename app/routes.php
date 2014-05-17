@@ -13,6 +13,7 @@
 
 Route::get('login', ['as' => 'user.show_login', 'uses' => 'UsersController@showLogin']);
 Route::post('login', ['as' => 'user.do_login', 'uses' => 'UsersController@login']);
+Route::any('logout', ['as' => 'user.logout', 'uses' => 'UsersController@logout']);
 
 Route::get('event/mine', ['as' => 'event.mine', 'uses' => 'EventsController@currentUser']);
 

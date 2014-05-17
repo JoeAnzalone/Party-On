@@ -18,6 +18,15 @@ class UsersController extends \BaseController {
         );
     }
 
+    public function logout()
+    {
+        Sentry::logout();
+        return Redirect::to(route('user.show_login'))->with(
+            'flash',
+            ['class' => 'success', 'message' => 'You have successfully logged out']
+        );
+    }
+
 	/**
 	 * Display a listing of the resource.
 	 *
