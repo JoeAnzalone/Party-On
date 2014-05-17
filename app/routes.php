@@ -14,4 +14,6 @@
 Route::resource('event', 'EventsController');
 Route::resource('guests', 'GuestsController');
 
-Route::any('{key}/{slug?}', 'EventsController@showByGuestKey');
+Route::any('{key}/{slug?}', ['as' => 'event.showbykey', 'uses' => 'EventsController@showByGuestKey']);
+
+Route::any('{key}/rsvp/{response}', ['as' => 'guest.editresponse', 'uses' => 'GuestsController@editResponse']);

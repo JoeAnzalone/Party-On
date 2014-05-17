@@ -65,6 +65,14 @@ class GuestsController extends \BaseController {
         //
     }
 
+    public function editResponse($key, $response)
+    {
+        $guest = Guest::where('key', $key)->firstOrFail();
+        $guest->response = $response;
+        $guest->save();
+        return Redirect::to(route('event.showbykey', $guest->key));
+    }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -1,6 +1,12 @@
 <?php
 
 class Guest extends \Eloquent {
+
+    const RESPONSE_NONE  = 0;
+    const RESPONSE_YES   = 1;
+    const RESPONSE_NO    = 2;
+    const RESPONSE_MAYBE = 3;
+
     protected $fillable = [];
 
     public function __construct()
@@ -36,5 +42,15 @@ class Guest extends \Eloquent {
         if (empty($this->key)) {
             $this->key = sha1($this->email . $this->event_id . microtime() . Config::get('app.key'));
         }
-  }
+    }
+
+    public function setResponseAttribute($response_str)
+    {
+        $constant = strtoupper($response_str);
+        $constant = 'RESPONSE_' . $constant;
+
+        $this->response_id = constant('self::' . $constant);
+
+        return $this;
+    }
 }
