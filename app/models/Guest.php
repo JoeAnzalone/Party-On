@@ -8,6 +8,7 @@ class Guest extends \Eloquent {
     const RESPONSE_MAYBE = 3;
 
     protected $fillable = [];
+    protected $appends  = ['response'];
 
     public function __construct()
     {
@@ -52,5 +53,17 @@ class Guest extends \Eloquent {
         $this->response_id = constant('self::' . $constant);
 
         return $this;
+    }
+
+    public function getResponseAttribute()
+    {
+        $responses = [
+            self::RESPONSE_NONE  => 'none',
+            self::RESPONSE_YES   => 'yes',
+            self::RESPONSE_NO    => 'no',
+            self::RESPONSE_MAYBE => 'maybe',
+        ];
+
+        return $responses[$this->response_id];
     }
 }
