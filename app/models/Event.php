@@ -3,7 +3,7 @@
 use \Michelf\Markdown;
 
 class Event extends \Eloquent {
-    protected $fillable = [];
+    protected $fillable = ['title', 'description', 'location', 'start_time', 'end_time'];
 
     public function guests()
     {

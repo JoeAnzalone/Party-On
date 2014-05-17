@@ -22,7 +22,8 @@ class EventsController extends \BaseController {
      */
     public function create()
     {
-        //
+        $data = [];
+        $this->layout->content = View::make('events.create', $data);
     }
 
     /**
@@ -32,7 +33,9 @@ class EventsController extends \BaseController {
      */
     public function store()
     {
-        //
+        $event = new Event(Input::except('_token'));
+        $event->save();
+        return Redirect::to(route('event.show', $event->id))->with('message', 'Event saved');
     }
 
     /**
@@ -41,7 +44,13 @@ class EventsController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function show($key, $slug = '')
+    public function show($id)
+    {
+        $data = Event::find($id);
+        $this->layout->content = View::make('events.show', $data);
+    }
+
+    public function showByGuestKey($key, $slug = '')
     {
         $guest = Guest::where('key', $key)->firstOrFail();
         $event = $guest->event;

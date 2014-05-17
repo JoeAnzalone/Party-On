@@ -14,4 +14,4 @@
 Route::resource('event', 'EventsController');
 Route::resource('guests', 'GuestsController');
 
-Route::any('{key}/{slug?}', 'EventsController@show');
+Route::any('{key}/{slug?}', 'EventsController@showByGuestKey');
