@@ -57,6 +57,10 @@ class Guest extends \Eloquent {
 
     public function getResponseAttribute()
     {
+        if (empty($this->response_id)) {
+            $this->response_id = self::RESPONSE_NONE;
+        }
+
         $responses = [
             self::RESPONSE_NONE  => 'none',
             self::RESPONSE_YES   => 'yes',
