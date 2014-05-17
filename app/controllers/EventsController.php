@@ -2,8 +2,6 @@
 
 class EventsController extends \BaseController {
 
-    protected $layout = 'layouts.main';
-
     /**
      * Display a listing of the resource.
      *
