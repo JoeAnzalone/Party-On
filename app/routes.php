@@ -11,6 +11,11 @@
 |
 */
 
+Route::get('login', ['as' => 'user.show_login', 'uses' => 'UsersController@showLogin']);
+Route::post('login', ['as' => 'user.do_login', 'uses' => 'UsersController@login']);
+
+Route::get('event/mine', ['as' => 'event.mine', 'uses' => 'EventsController@currentUser']);
+
 Route::resource('event', 'EventsController');
 Route::resource('guests', 'GuestsController');
 

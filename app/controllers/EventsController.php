@@ -13,6 +13,12 @@ class EventsController extends \BaseController {
         $this->layout->content = View::make('events.index', ['events' => $events]);
     }
 
+    public function currentUser()
+    {
+        $events = Event::where('user_id', Sentry::getUser()->id)->get();
+        $this->layout->content = View::make('events.index', ['events' => $events]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
