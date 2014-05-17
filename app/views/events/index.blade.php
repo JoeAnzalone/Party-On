@@ -1,1 +1,3 @@
-/Users/joe/Dropbox/www/party-on/app/views/events/index.blade.php
+@foreach ($events as $event)
+    {{ $event }}
+@endforeach

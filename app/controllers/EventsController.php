@@ -2,6 +2,8 @@
 
 class EventsController extends \BaseController {
 
+	protected $layout = 'layouts.main';
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,7 +11,8 @@ class EventsController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$events = Event::all();
+		$this->layout->content = View::make('events.index', ['events' => $events]);
 	}
 
 	/**
