@@ -41,9 +41,12 @@ class EventsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($key, $slug = '')
 	{
-		//
+		$guest = Guest::where('key', $key)->firstOrFail();
+		$event = $guest->event;
+		$data = $event;
+		$this->layout->content = View::make('events.show', $data);
 	}
 
 	/**

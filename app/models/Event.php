@@ -1,5 +1,10 @@
 <?php
 
 class Event extends \Eloquent {
-	protected $fillable = [];
+    protected $fillable = [];
+
+    public function guests()
+    {
+        return $this->hasMany('Guest');
+    }
 }
