@@ -11,12 +11,29 @@ class Event extends \Eloquent {
             $params['start_time'] = $params['start_time_date'] . ' ' . $params['start_time_time'];
         }
 
+        if (isset($params['guests_string'])) {
+            $this->addGuestsAsString($params['guests_string']);
+        }
+
         return parent::__construct($params);
     }
 
     public function guests()
     {
         return $this->hasMany('Guest');
+    }
+
+    public function addGuestsAsString($string)
+    {
+        $this->save();
+        $guests_strings = explode("\n", trim($string));
+        foreach ($guests_strings as $guest_str) {
+            $guest = new Guest;
+            $guest->populateByString($guest_str);
+            $this->guests()->save($guest);
+            $guests[] = $guest;
+        }
+
     }
 
     public function getDescriptionAttribute($description)
