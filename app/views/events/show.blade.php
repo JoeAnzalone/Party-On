@@ -6,10 +6,12 @@
 <div class="location">{{ $event['location'] }}</div>
 
 <h2>Start Time</h2>
-<div class="start_time">{{ $event['start_time'] }}</div>
+<div class="start_time">{{ $event->nice_start_time }}</div>
 
+@if ($event->end_time)
 <h2>End Time</h2>
-<div class="end_time">{{ $event['end_time'] }}</div>
+<div class="end_time">{{ $event->nice_end_time }}</div>
+@endif
 
 @if (!empty($guest['key']))
     <h2>Your current response: <strong>{{ $guest['response'] }}</strong></h2>

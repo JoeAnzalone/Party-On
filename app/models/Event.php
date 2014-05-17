@@ -40,4 +40,14 @@ class Event extends \Eloquent {
     {
         return Markdown::defaultTransform($description);
     }
+
+    public function getNiceStartTimeAttribute()
+    {
+        return date('l F jS, Y @ g:ia', time($this->start_time));
+    }
+
+    public function getNiceEndTimeAttribute()
+    {
+        return date('l F jS, Y @ g:ia', time($this->end_time));
+    }
 }
