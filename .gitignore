@@ -3,6 +3,7 @@
 composer.phar
 composer.lock
 app/config/local
+app/views/_analytics.blade.php
 .env.*.php
 .env.php
 .DS_Store

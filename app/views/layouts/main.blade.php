@@ -16,5 +16,6 @@
     {{ $content }}
     {{ $scripts }}
     </div>
+    {{ $analytics }}
 </body>
 </html>
