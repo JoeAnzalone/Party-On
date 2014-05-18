@@ -1,6 +1,7 @@
 <?php
 
-class EventsController extends \BaseController {
+class EventsController extends \BaseController
+{
 
     public function __construct()
     {
@@ -88,8 +89,12 @@ class EventsController extends \BaseController {
         $this->layout->scripts .= HTML::script('http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js');
         $this->layout->scripts .= HTML::script('/js/events.show.js');
 
-        $guest = Guest::where('key', $key)->firstOrFail()->load('event');
-        $event = $guest->event->load('guests');
+        $guest = Guest::where('key', $key)->firstOrFail();
+        $event = $guest->event;
+
+        $event->guests->each(function ($item) {
+            unset($item->key);
+        });
 
         $data = [
             'guest' => $guest,
@@ -141,5 +146,4 @@ class EventsController extends \BaseController {
     {
         //
     }
-
 }
