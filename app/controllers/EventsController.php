@@ -2,6 +2,11 @@
 
 class EventsController extends \BaseController {
 
+    public function __construct()
+    {
+        $this->beforeFilter('auth', ['except' => ['show', 'showByGuestKey']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
