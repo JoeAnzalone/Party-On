@@ -84,4 +84,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface
     {
         return $this->email;
     }
+
+    public static function loggedIn()
+    {
+        return User::find(Sentry::getUser()->id);
+    }
 }

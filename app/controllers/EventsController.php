@@ -51,7 +51,7 @@ class EventsController extends \BaseController {
     public function store()
     {
         $event = new Event(Input::except('_token'));
-        $event->save();
+        User::loggedIn()->events()->save($event);
 
         return Redirect::to(route('event.show', $event->id))->with(
             'flash',
