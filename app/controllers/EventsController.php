@@ -76,7 +76,7 @@ class EventsController extends \BaseController {
         $data = ['event' => $event];
 
         $host = new Guest();
-        $host->fill(['name' => $event->user->email, 'response' => 'yes']);
+        $host->fill(['name' => $event->user->name, 'response' => 'yes']);
         $data['event']->guests->prepend($host);
         $this->layout->content = View::make('events.show', $data);
     }
@@ -97,7 +97,7 @@ class EventsController extends \BaseController {
         ];
 
         $host = new Guest();
-        $host->fill(['name' => $event->user->email, 'response' => 'yes']);
+        $host->fill(['name' => $event->user->name, 'response' => 'yes']);
         $data['event']->guests->prepend($host);
         $this->layout->content = View::make('events.show', $data);
     }
