@@ -1,4 +1,4 @@
-{{ Form::model($event, array('route' => array('event.update', $event->id))) }}
+{{ Form::model($event, array('route' => array('event.update', $event->id), 'method' => 'put')) }}
     <label>Title{{ Form::text('title', null, ['placeholder' => 'Title']) }}</label>
     <label>Description{{ Form::textarea('description', null, ['placeholder' => 'Description']) }}</label>
     <label>Location{{ Form::text('location', null, ['placeholder' => 'Location']) }}</label>

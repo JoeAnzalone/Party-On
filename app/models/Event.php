@@ -3,15 +3,11 @@
 use \Michelf\Markdown;
 
 class Event extends \Eloquent {
-    protected $fillable = ['title', 'description', 'location', 'start_time', 'end_time'];
+    protected $fillable = ['title', 'description', 'location', 'start_time', 'start_time_date', 'start_time_time', 'end_time', 'end_time_date', 'end_time_time'];
     protected $appends  = ['description_html'];
 
     public function __construct($params = [])
     {
-        if (isset($params['start_time_date']) && isset($params['start_time_time'])) {
-            $params['start_time'] = $params['start_time_date'] . ' ' . $params['start_time_time'];
-        }
-
         if (isset($params['guests_string'])) {
             $this->addGuestsAsString($params['guests_string']);
         }
@@ -50,6 +46,20 @@ class Event extends \Eloquent {
     public function getNiceEndTimeAttribute()
     {
         return date('l F jS, Y @ g:ia', strtotime($this->end_time));
+    }
+
+    public function setStartTimeDateAttribute($date)
+    {
+        $timestamp = strtotime($date . ' ' . $this->start_time_time);
+        unset($this->start_time_date);
+        $this->start_time = date('Y-m-d H:i:s', $timestamp);
+    }
+
+    public function setStartTimeTimeAttribute($time)
+    {
+        $timestamp = strtotime($this->start_time_date . ' ' . $time);
+        unset($this->start_time_time);
+        $this->start_time = date('Y-m-d H:i:s', $timestamp);
     }
 
     public function getStartTimeDateAttribute()

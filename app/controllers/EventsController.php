@@ -47,7 +47,11 @@ class EventsController extends \BaseController {
     {
         $event = new Event(Input::except('_token'));
         $event->save();
-        return Redirect::to(route('event.show', $event->id))->with('message', 'Event saved');
+
+        return Redirect::to(route('event.show', $event->id))->with(
+            'flash',
+            ['class' => 'success', 'message' => 'Event saved.']
+        );
     }
 
     /**
@@ -95,7 +99,13 @@ class EventsController extends \BaseController {
      */
     public function update($id)
     {
-        //
+        $event = Event::findOrFail($id);
+        $event->update(Input::except('_token'));
+
+        return Redirect::to(route('event.show', $event->id))->with(
+            'flash',
+            ['class' => 'success', 'message' => 'Event updated.']
+        );
     }
 
     /**
