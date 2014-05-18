@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="page">
-    @if(Session::has('flash'))
+    @if(Session::has('flash.message'))
         <div class="flash-message {{ Session::get('flash.class') }}">
         {{ Session::get('flash.message') }}
         </div>

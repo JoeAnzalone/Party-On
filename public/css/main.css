@@ -6,6 +6,12 @@ body {
     padding: 0;
 }
 
+input,
+textarea {
+    padding: 0.25em;
+    font-size: 1em;
+}
+
 input[type="submit"],
 button {
     cursor: pointer;
@@ -17,4 +23,24 @@ button {
     padding: 1em;
     border: 1px solid #ddd;
     border-radius: 0.23em;
+}
+
+.flash-message {
+    text-align: center;
+    border: 1px solid;
+    border-radius: 0.23em;
+    max-width: 400px;
+    margin: auto;
+    margin-bottom: 1em;
+    padding: 0.5em;
+}
+
+.flash-message.success {
+    background: rgba(0, 255, 0, 0.25);
+    color: #008B00;
+}
+
+.flash-message.error {
+    background: rgba(255, 0, 0, 0.25);
+    color: #8B0000;
 }
