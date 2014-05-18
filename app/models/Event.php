@@ -15,6 +15,11 @@ class Event extends \Eloquent {
         return parent::__construct($params);
     }
 
+    public function user()
+    {
+        return $this->belongsTo('User');
+    }
+
     public function guests()
     {
         return $this->hasMany('Guest');

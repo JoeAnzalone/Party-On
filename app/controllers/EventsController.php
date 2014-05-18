@@ -72,7 +72,12 @@ class EventsController extends \BaseController {
         $this->layout->scripts .= HTML::script('http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js');
         $this->layout->scripts .= HTML::script('/js/events.show.js');
 
-        $data = ['event' => Event::find($id)->load('guests')];
+        $event = Event::find($id)->load('guests');
+        $data = ['event' => $event];
+
+        $host = new Guest();
+        $host->fill(['name' => $event->user->email, 'response' => 'yes']);
+        $data['event']->guests->prepend($host);
         $this->layout->content = View::make('events.show', $data);
     }
 
@@ -91,6 +96,9 @@ class EventsController extends \BaseController {
             'event' => $event,
         ];
 
+        $host = new Guest();
+        $host->fill(['name' => $event->user->email, 'response' => 'yes']);
+        $data['event']->guests->prepend($host);
         $this->layout->content = View::make('events.show', $data);
     }
 

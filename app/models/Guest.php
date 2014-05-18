@@ -7,7 +7,7 @@ class Guest extends \Eloquent {
     const RESPONSE_NO    = 2;
     const RESPONSE_MAYBE = 3;
 
-    protected $fillable = [];
+    protected $fillable = ['name', 'response'];
     protected $appends  = ['response'];
 
     public function __construct()
