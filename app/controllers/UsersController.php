@@ -1,8 +1,7 @@
 <?php
 
-class UsersController extends \BaseController {
-
-
+class UsersController extends \BaseController
+{
     public function showLogin()
     {
         $this->layout->content = View::make('users.login');
@@ -10,7 +9,14 @@ class UsersController extends \BaseController {
 
     public function login()
     {
-        Sentry::authenticate(Input::only(['email', 'password']));
+        try {
+            Sentry::authenticate(Input::only(['email', 'password']), true);
+        } catch (Exception $e) {
+            return Redirect::to(route('user.show_login'))->with(
+                'flash',
+                ['class' => 'error', 'message' => $e->getMessage()]
+            );
+        }
 
         return Redirect::to(route('event.mine'))->with(
             'flash',
@@ -100,5 +106,4 @@ class UsersController extends \BaseController {
     {
         //
     }
-
 }
