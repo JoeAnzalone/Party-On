@@ -44,21 +44,21 @@ class Event extends \Eloquent {
 
     public function getNiceStartTimeAttribute()
     {
-        return date('l F jS, Y @ g:ia', time($this->start_time));
+        return date('l F jS, Y @ g:ia', strtotime($this->start_time));
     }
 
     public function getNiceEndTimeAttribute()
     {
-        return date('l F jS, Y @ g:ia', time($this->end_time));
+        return date('l F jS, Y @ g:ia', strtotime($this->end_time));
     }
 
     public function getStartTimeDateAttribute()
     {
-        return date('Y-m-d', time($this->start_time));
+        return date('Y-m-d', strtotime($this->start_time));
     }
 
     public function getStartTimeTimeAttribute()
     {
-        return date('H:i:s', time($this->start_time));
+        return date('H:i:s', strtotime($this->start_time));
     }
 }
