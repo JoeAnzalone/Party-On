@@ -1,13 +1,11 @@
-<h1>{{ $event['title'] }}</h1>
+<h1 class="title">{{ $event['title'] }}</h1>
+<div class="start_time">On {{ $event->nice_start_time }}</div>
 
 <div class="description">{{ $event->description_html }}</div>
 
 <h2>Location</h2>
 <div class="location" data-location="{{ $event->location }}"><a href="{{ $event->location_url }}" title="Open in Google Maps" target="_blank">{{ $event->location }}</a></div>
 <div id="map" class="map"></div>
-
-<h2>Start Time</h2>
-<div class="start_time">{{ $event->nice_start_time }}</div>
 
 @if ($event->end_time)
 <h2>End Time</h2>
