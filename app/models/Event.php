@@ -71,4 +71,9 @@ class Event extends \Eloquent {
     {
         return date('H:i:s', strtotime($this->start_time));
     }
+
+    public function getLocationUrlAttribute()
+    {
+        return 'https://www.google.com/maps/place/' . urlencode($this->location);
+    }
 }

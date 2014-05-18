@@ -3,7 +3,8 @@
 <div class="description">{{ $event->description_html }}</div>
 
 <h2>Location</h2>
-<div class="location">{{ $event['location'] }}</div>
+<div class="location" data-location="{{ $event->location }}"><a href="{{ $event->location_url }}" title="Open in Google Maps" target="_blank">{{ $event->location }}</a></div>
+<div id="map" class="map"></div>
 
 <h2>Start Time</h2>
 <div class="start_time">{{ $event->nice_start_time }}</div>

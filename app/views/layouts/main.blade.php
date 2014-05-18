@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Party On!</title>
+    {{ $styles }}
 </head>
 <body>
     @if(Session::has('flash'))
@@ -11,5 +12,6 @@
         </div>
     @endif
     {{ $content }}
+    {{ $scripts }}
 </body>
 </html>
