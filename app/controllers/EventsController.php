@@ -73,6 +73,11 @@ class EventsController extends \BaseController {
 
     public function showByGuestKey($key, $slug = '')
     {
+        $this->layout->styles  .= HTML::style('http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css');
+        $this->layout->styles  .= HTML::style('/css/events.show.css');
+        $this->layout->scripts .= HTML::script('http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js');
+        $this->layout->scripts .= HTML::script('/js/events.show.js');
+
         $guest = Guest::where('key', $key)->firstOrFail()->load('event');
         $event = $guest->event->load('guests');
 
