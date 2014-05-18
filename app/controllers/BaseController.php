@@ -15,5 +15,7 @@ class BaseController extends Controller
         if (! is_null($this->layout)) {
             $this->layout = View::make($this->layout);
         }
+        $this->layout->styles  = HTML::style('/css/main.css');
+        $this->layout->scripts = '';
     }
 }
