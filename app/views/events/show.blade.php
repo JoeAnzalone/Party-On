@@ -22,7 +22,7 @@
     {{ link_to_route('guest.edit_response', 'Maybe', [$guest['key'], 'maybe']) }}
 @endif
 
-@if (!empty($event->guests))
+@if (!$event->guests->isEmpty())
     <h2>Guests</h2>
     <ul class="guests">
         @foreach ($event['guests'] as $guest)

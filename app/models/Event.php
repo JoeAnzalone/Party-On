@@ -23,14 +23,16 @@ class Event extends \Eloquent {
     public function addGuestsAsString($string)
     {
         $this->save();
+
         $guests_strings = explode("\n", trim($string));
+        $guests_strings = array_filter($guests_strings);
+
         foreach ($guests_strings as $guest_str) {
             $guest = new Guest;
             $guest->populateByString($guest_str);
             $this->guests()->save($guest);
             $guests[] = $guest;
         }
-
     }
 
     public function getDescriptionHtmlAttribute()
