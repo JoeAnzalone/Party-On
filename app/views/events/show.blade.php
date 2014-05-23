@@ -20,17 +20,20 @@
     {{ link_to_route('guest.edit_response', 'Maybe', [$guest['key'], 'maybe']) }}
 @endif
 
-@if (!$event->guests->isEmpty())
+@if ($event->guestsByResponse())
     <h2>Guests</h2>
-    <ul class="guests">
-        @foreach ($event['guests'] as $guest)
-            <li>
-                @if (!empty($guest->key))
-                    {{ link_to_route('event.showbykey', $guest->name, $guest->key) }} - {{ $guest->response }}
-                @else
-                    {{ $guest->name }} - {{ $guest->response }}
-                @endif
-            </li>
+        @foreach ($event->guestsByResponse() as $response => $guests)
+            <h2>{{ $response }}</h2>
+            <ul class="guests">
+                @foreach ($guests as $guest)
+                    <li>
+                        @if (!empty($guest->key))
+                            {{ link_to_route('event.showbykey', $guest->name, $guest->key) }}
+                        @else
+                            {{ $guest->name }}
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
         @endforeach
-    </ul>
 @endif

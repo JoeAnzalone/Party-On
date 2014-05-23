@@ -25,6 +25,15 @@ class Event extends \Eloquent {
         return $this->hasMany('Guest');
     }
 
+    public function guestsByResponse()
+    {
+        foreach ($this->guests as $guest) {
+            $results[$guest->response][] = $guest;
+        }
+
+        return $results;
+    }
+
     public function addGuestsAsString($string)
     {
         $this->save();
