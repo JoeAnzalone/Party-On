@@ -28,7 +28,8 @@ class Event extends \Eloquent {
     public function guestsByResponse()
     {
         foreach ($this->guests as $guest) {
-            $results[$guest->response][] = $guest;
+            $response = ucwords($guest->response);
+            $results[$response][] = $guest;
         }
 
         return $results;
