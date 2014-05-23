@@ -23,15 +23,14 @@
 @if ($event->guestsByResponse())
     <h2>Guests</h2>
         @foreach ($event->guestsByResponse() as $response => $guests)
-            <h2>{{ $response }}</h2>
+            <h3>{{ $response }}</h3>
             <ul class="guests">
                 @foreach ($guests as $guest)
                     <li>
                         {{ $guest->getAvatar() }}
+                        <span class="name">{{ $guest->name }}</span>
                         @if (!empty($guest->key))
-                            {{ link_to_route('event.showbykey', $guest->name, $guest->key) }}
-                        @else
-                            {{ $guest->name }}
+                            <span class="invite-link"> - {{ link_to_route('event.showbykey', 'Invite link', $guest->key) }}</span>
                         @endif
                     </li>
                 @endforeach

@@ -77,3 +77,22 @@ label {
 .fields > li {
     margin: 1em 0;
 }
+
+.guests {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.guests li {
+    margin: 0.5em 0;
+}
+
+.guests .avatar {
+    vertical-align: middle;
+}
+
+.guests .name {
+    font-size: 1.25em;
+    margin-left: 0.25em;
+}
