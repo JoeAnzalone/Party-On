@@ -77,9 +77,18 @@ class Guest extends \Eloquent {
         return HTML::image($this->getAvatarUrl($size), $alt, ['class' => 'avatar']);
     }
 
-    public function getAvatarUrl($size = 50)
+    public function getAvatarUrl($size = 50, $options = [])
     {
-        return 'https://www.gravatar.com/avatar/' . md5( strtolower( trim( $this->email ) ) ) . '?s=' . $size;
+        $default_options = [
+            'size'    => $size,
+            'default' => 'identicon',
+            'rating'  => 'pg',
+        ];
+
+        $options = array_merge($default_options, $options);
+        $query_string = http_build_query($options);
+
+        return 'https://www.gravatar.com/avatar/' . md5( strtolower( trim( $this->email ) ) ) . '?' . $query_string;
     }
 
     public function getPossessiveAttribute()
