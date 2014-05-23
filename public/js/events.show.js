@@ -1,18 +1,18 @@
 var loc = document.querySelector('.location').dataset.location;
 
 var xhr = new XMLHttpRequest();
+var map = L.map('map', {'maxZoom': 18});
 xhr.onload = function(e){
     var place = JSON.parse(this.responseText)[0];
-    var map = L.map('map', {'maxZoom': 18}).setView([place.lat, place.lon]);
     var marker = L.marker([place.lat, place.lon]).addTo(map);
-
+    map.setView([place.lat, place.lon]);
+    map.scrollWheelZoom.disable();
     var bounds = L.latLngBounds(
         [place.boundingbox[1], place.boundingbox[3]],
         [place.boundingbox[0], place.boundingbox[2]]
     );
     map.fitBounds(bounds);
     L.rectangle(bounds, {color: "#0f0", weight: 1, fillOpacity: 0.1}).addTo(map);
-    console.log(bounds);
 
     // https://wiki.openstreetmap.org/wiki/Mapquest#MapQuest-hosted_map_tiles
     L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
@@ -22,3 +22,24 @@ xhr.onload = function(e){
 };
 xhr.open("get", "http://open.mapquestapi.com/nominatim/v1/search.php?format=json&q=" + loc, true);
 xhr.send();
+
+fixDragging = function(){
+    var mapWidth;
+    var pageWidth;
+
+    mapWidth  = document.querySelector('#map').offsetWidth
+    pageWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
+
+    var widthPercentage  = mapWidth / pageWidth * 100;
+
+    if (widthPercentage > 80) {
+        map.dragging.disable();
+        if (map.tap) map.tap.disable();
+    } else {
+        map.dragging.enable();
+        if (map.tap) map.tap.enable();
+    }
+};
+
+fixDragging();
+window.onresize = fixDragging;
