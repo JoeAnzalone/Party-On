@@ -7,8 +7,8 @@ class Guest extends \Eloquent {
     const RESPONSE_NO    = 2;
     const RESPONSE_MAYBE = 3;
 
-    protected $fillable = ['name', 'response'];
-    protected $appends  = ['response'];
+    protected $fillable = ['name', 'email', 'response'];
+    protected $appends  = ['response', 'possessive'];
 
     public function __construct()
     {
@@ -69,5 +69,23 @@ class Guest extends \Eloquent {
         ];
 
         return $responses[$this->response_id];
+    }
+
+    public function getAvatar($size = 50)
+    {
+        $alt = $this->possessive . ' avatar';
+        return HTML::image($this->getAvatarUrl($size), $alt, ['class' => 'avatar']);
+    }
+
+    public function getAvatarUrl($size = 50)
+    {
+        return 'https://www.gravatar.com/avatar/' . md5( strtolower( trim( $this->email ) ) ) . '?s=' . $size;
+    }
+
+    public function getPossessiveAttribute()
+    {
+        // Get name as possessive
+        // http://davidwalsh.name/php-possessive-punctuation
+        return $this->name.'\''.($this->name[strlen($this->name) - 1] != 's' ? 's' : '');
     }
 }

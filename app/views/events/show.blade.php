@@ -27,6 +27,7 @@
             <ul class="guests">
                 @foreach ($guests as $guest)
                     <li>
+                        {{ $guest->getAvatar() }}
                         @if (!empty($guest->key))
                             {{ link_to_route('event.showbykey', $guest->name, $guest->key) }}
                         @else
