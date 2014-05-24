@@ -4,9 +4,9 @@
 @if (!empty($guest['key']))
     <div class="respond">
         @if ($guest['response'] != 'none')
-        Your RSVP:
+        <span class="label">Your RSVP:</span>
         @else
-        RSVP here:
+        <span class="label">RSVP here:</span>
         @endif
 
         @if ($guest['response'] != 'yes')   {{ link_to_route('guest.edit_response', 'Yes ✓',   [$guest['key'], 'yes']) }}   @else <span class="selected">Yes ✓</span>   @endif

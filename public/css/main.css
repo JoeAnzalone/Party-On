@@ -98,13 +98,29 @@ label {
 }
 
 .respond {
-    font-size: 1.2em;
+    margin: 1em 0;
+    padding: 0.5em;
+    border: 1px solid #aaa;
+    border-radius: 0.2em;
+    background-color: #eee;
+}
+
+.respond .label {
+    display: block;
+}
+
+@media screen and (min-width: 480px){
+    .respond .label {
+        display: inline-block;
+    }
 }
 
 .respond a,
 .respond .selected {
     display: inline-block;
+    font-size: 1.1em;
     text-decoration: none;
+    margin: 0.25em;
     padding: 0.25em 0.5em;
     border-radius: 0.2em;
     color: rgba(0, 0, 0, 1);
