@@ -52,7 +52,7 @@ class Event extends \Eloquent {
 
     public function getSlugAttribute()
     {
-        $slug = strtolower($this->title);
+        $slug = trim(strtolower($this->title));
         $slug = str_replace(' ', '-', $slug);
         $slug = preg_replace( '/[^a-z0-9_-]/', '', $slug );
 
