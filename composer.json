@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"michelf/php-markdown": "1.4.*@dev",
-		"cartalyst/sentry": "2.1.*"
+		"cartalyst/sentry": "2.1.*",
+		"doctrine/dbal": "2.4.*"
 	},
 	"require-dev": {
 		"way/generators": "2.*"
