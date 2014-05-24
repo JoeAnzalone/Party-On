@@ -97,6 +97,12 @@ label {
     margin-left: 0.25em;
 }
 
+.guests .you {
+    font-style: italic;
+    opacity: 0.7;
+    font-size: 0.9em;
+}
+
 .respond {
     margin: 1em 0;
     padding: 0.5em;

@@ -35,12 +35,15 @@
         @foreach ($event->guestsByResponse() as $response => $guests)
             <h3>{{ $response }}</h3>
             <ul class="guests">
-                @foreach ($guests as $guest)
+                @foreach ($guests as $thisGuest)
                     <li>
-                        {{ $guest->getAvatar() }}
-                        <span class="name">{{ $guest->name }}</span>
-                        @if (!empty($guest->key))
-                            <span class="invite-link"> - {{ link_to_route('event.showbykey', 'Invite link', [$guest->key, $event->slug]) }}</span>
+                        {{ $thisGuest->getAvatar() }}
+                        <span class="name">{{ $thisGuest->name }}</span>
+                        @if (!empty($guest) && $thisGuest->id == $guest->id)
+                            <span class="you">(That's you!)</span>
+                        @endif
+                        @if (!empty($thisGuest->key))
+                            <span class="invite-link"> - {{ link_to_route('event.showbykey', 'Invite link', [$thisGuest->key, $event->slug]) }}</span>
                         @endif
                     </li>
                 @endforeach
