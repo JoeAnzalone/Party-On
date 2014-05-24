@@ -91,10 +91,15 @@ class Guest extends \Eloquent {
         return 'https://www.gravatar.com/avatar/' . md5( strtolower( trim( $this->email ) ) ) . '?' . $query_string;
     }
 
+    public function getNameAttribute($name)
+    {
+        return !empty($name) ? $name : 'Anonymous Attendee';
+    }
+
     public function getPossessiveAttribute()
     {
         // Get name as possessive
         // http://davidwalsh.name/php-possessive-punctuation
-        return $this->name.'\''.($this->name[strlen($this->name) - 1] != 's' ? 's' : '');
+        return $this->name . '\'' . ($this->name[strlen($this->name) - 1] != 's' ? 's' : '');
     }
 }
