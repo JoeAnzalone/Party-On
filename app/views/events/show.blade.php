@@ -17,9 +17,13 @@
 
 <div class="description">{{ $event->description_html }}</div>
 
-<h2>Location</h2>
-<div class="location" data-location="{{ $event->location }}"><a href="{{ $event->location_url }}" title="Open in Google Maps" target="_blank">{{ $event->location }}</a></div>
-<div id="map" class="map"></div>
+@if (!empty($event->location))
+    <div class="location" data-location="{{ $event->location }}">
+        <h2>Location</h2>
+        <a href="{{ $event->location_url }}" title="Open in Google Maps" target="_blank">{{ $event->location }}</a>
+        <div id="map" class="map"></div>
+    </div>
+@endif
 
 @if ($event->end_time)
 <h2>End Time</h2>
