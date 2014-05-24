@@ -47,10 +47,14 @@ class Guest extends \Eloquent {
 
     public function setResponseAttribute($response_str)
     {
-        $constant = strtoupper($response_str);
-        $constant = 'RESPONSE_' . $constant;
+        $responses = [
+            'awaiting response' => self::RESPONSE_NONE,
+            'yes'        => self::RESPONSE_YES,
+            'no'         => self::RESPONSE_NO,
+            'maybe'      => self::RESPONSE_MAYBE,
+        ];
 
-        $this->response_id = constant('self::' . $constant);
+        $this->response_id = $responses[$response_str];
 
         return $this;
     }
@@ -62,7 +66,7 @@ class Guest extends \Eloquent {
         }
 
         $responses = [
-            self::RESPONSE_NONE  => 'none',
+            self::RESPONSE_NONE  => 'awaiting response',
             self::RESPONSE_YES   => 'yes',
             self::RESPONSE_NO    => 'no',
             self::RESPONSE_MAYBE => 'maybe',
