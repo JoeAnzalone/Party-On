@@ -12,7 +12,8 @@ xhr.onload = function(e){
         [place.boundingbox[0], place.boundingbox[2]]
     );
     map.fitBounds(bounds);
-    L.rectangle(bounds, {color: "#0f0", weight: 1, fillOpacity: 0.1}).addTo(map);
+    var radius = L.latLng(place.lat, place.lon).distanceTo([place.lat, place.boundingbox[3]]);
+    L.circle([place.lat, place.lon], radius, {color: "#0f0", weight: 1, fillOpacity: 0.1}).addTo(map);
 
     // https://wiki.openstreetmap.org/wiki/Mapquest#MapQuest-hosted_map_tiles
     L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
