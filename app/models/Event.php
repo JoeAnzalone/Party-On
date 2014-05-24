@@ -3,7 +3,7 @@
 use \Michelf\Markdown;
 
 class Event extends \Eloquent {
-    protected $fillable = ['title', 'description', 'location', 'start_time', 'start_time_date', 'start_time_time', 'end_time', 'end_time_date', 'end_time_time'];
+    protected $fillable = ['title', 'description', 'location_name', 'location_address', 'start_time', 'start_time_date', 'start_time_time', 'end_time', 'end_time_date', 'end_time_time'];
     protected $appends  = ['slug', 'description_html'];
 
     public function __construct($params = [])
@@ -100,6 +100,10 @@ class Event extends \Eloquent {
 
     public function getLocationUrlAttribute()
     {
-        return 'https://www.google.com/maps/place/' . urlencode($this->location);
+        $url  = 'https://www.google.com/maps/search/';
+        $url .=  urlencode($this->location_address);
+        $url .= !empty($this->location_name) ? ' (' . urlencode($this->location_name) . ')' : '';
+
+        return $url;
     }
 }
