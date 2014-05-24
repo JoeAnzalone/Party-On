@@ -96,3 +96,33 @@ label {
     font-size: 1.25em;
     margin-left: 0.25em;
 }
+
+.respond {
+    font-size: 1.2em;
+}
+
+.respond a,
+.respond .selected {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0.25em 0.5em;
+    border-radius: 0.2em;
+    color: rgba(0, 0, 0, 1);
+    background: rgba(0, 0, 0, 0.4);
+    background: linear-gradient(to bottom, #ffffff, #b8b8b8);
+    border: 1px solid #aaa;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.respond a:active,
+.respond .selected {
+    color: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to top, #ffffff, #b8b8b8);
+}
+
+.respond .selected {
+    cursor: default;
+}

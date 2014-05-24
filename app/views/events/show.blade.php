@@ -1,6 +1,20 @@
 <h1 class="title">{{ $event['title'] }}</h1>
 <div class="start_time">On {{ $event->nice_start_time }}</div>
 
+@if (!empty($guest['key']))
+    <div class="respond">
+        @if ($guest['response'] != 'none')
+        Your RSVP:
+        @else
+        RSVP here:
+        @endif
+
+        @if ($guest['response'] != 'yes')   {{ link_to_route('guest.edit_response', 'Yes ✓',   [$guest['key'], 'yes']) }}   @else <span class="selected">Yes ✓</span>   @endif
+        @if ($guest['response'] != 'no')    {{ link_to_route('guest.edit_response', 'No ✗',    [$guest['key'], 'no']) }}    @else <span class="selected">No ✗</span>    @endif
+        @if ($guest['response'] != 'maybe') {{ link_to_route('guest.edit_response', 'Maybe ?', [$guest['key'], 'maybe']) }} @else <span class="selected">Maybe ?</span> @endif
+    </div>
+@endif
+
 <div class="description">{{ $event->description_html }}</div>
 
 <h2>Location</h2>
@@ -10,14 +24,6 @@
 @if ($event->end_time)
 <h2>End Time</h2>
 <div class="end_time">{{ $event->nice_end_time }}</div>
-@endif
-
-@if (!empty($guest['key']))
-    <h2>Your current response: <strong>{{ $guest['response'] }}</strong></h2>
-    Change it here:
-    {{ link_to_route('guest.edit_response', 'Yes', [$guest['key'], 'yes']) }} /
-    {{ link_to_route('guest.edit_response', 'No', [$guest['key'], 'no']) }} /
-    {{ link_to_route('guest.edit_response', 'Maybe', [$guest['key'], 'maybe']) }}
 @endif
 
 @if ($event->guestsByResponse())
