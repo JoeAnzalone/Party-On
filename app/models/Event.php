@@ -4,7 +4,7 @@ use \Michelf\Markdown;
 
 class Event extends \Eloquent {
     protected $fillable = ['title', 'description', 'location', 'start_time', 'start_time_date', 'start_time_time', 'end_time', 'end_time_date', 'end_time_time'];
-    protected $appends  = ['description_html'];
+    protected $appends  = ['slug', 'description_html'];
 
     public function __construct($params = [])
     {
@@ -48,6 +48,15 @@ class Event extends \Eloquent {
             $this->guests()->save($guest);
             $guests[] = $guest;
         }
+    }
+
+    public function getSlugAttribute()
+    {
+        $slug = strtolower($this->title);
+        $slug = str_replace(' ', '-', $slug);
+        $slug = preg_replace( '/[^a-z0-9_-]/', '', $slug );
+
+        return strtolower($slug);
     }
 
     public function getDescriptionHtmlAttribute()

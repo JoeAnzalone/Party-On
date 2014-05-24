@@ -40,7 +40,7 @@
                         {{ $guest->getAvatar() }}
                         <span class="name">{{ $guest->name }}</span>
                         @if (!empty($guest->key))
-                            <span class="invite-link"> - {{ link_to_route('event.showbykey', 'Invite link', $guest->key) }}</span>
+                            <span class="invite-link"> - {{ link_to_route('event.showbykey', 'Invite link', [$guest->key, $event->slug]) }}</span>
                         @endif
                     </li>
                 @endforeach
