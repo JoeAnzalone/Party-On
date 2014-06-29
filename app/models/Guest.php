@@ -90,9 +90,18 @@ class Guest extends \Eloquent {
         ];
 
         $options = array_merge($default_options, $options);
+
+        $email = $this->email;
+        if (!$email) {
+            $options['forcedefault'] = 'y';
+            $email = $this->name;
+        }
+
+        $base_url = 'https://www.gravatar.com/avatar/';
+        $hash = md5( strtolower( trim( $email ) ) );
         $query_string = http_build_query($options);
 
-        return 'https://www.gravatar.com/avatar/' . md5( strtolower( trim( $this->email ) ) ) . '?' . $query_string;
+        return $base_url . $hash . '?' . $query_string;
     }
 
     public function getNameAttribute($name)
