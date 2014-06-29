@@ -51,7 +51,10 @@ class EventsController extends \BaseController
      */
     public function store()
     {
-        $event = new Event(Input::except('_token'));
+        $event = new Event();
+        $event->user()->associate(User::loggedIn());
+        $event->fill(Input::except('_token'));
+
         User::loggedIn()->events()->save($event);
 
         return Redirect::to(route('event.show', $event->id))->with(

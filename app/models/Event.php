@@ -3,17 +3,8 @@
 use \Michelf\Markdown;
 
 class Event extends \Eloquent {
-    protected $fillable = ['title', 'description', 'location_name', 'location_address', 'start_time', 'start_time_date', 'start_time_time', 'end_time', 'end_time_date', 'end_time_time'];
+    protected $fillable = ['title', 'description', 'location_name', 'location_address', 'start_time', 'start_time_date', 'start_time_time', 'end_time', 'end_time_date', 'end_time_time', 'guests_string'];
     protected $appends  = ['slug', 'description_html'];
-
-    public function __construct($params = [])
-    {
-        if (isset($params['guests_string'])) {
-            $this->addGuestsAsString($params['guests_string']);
-        }
-
-        return parent::__construct($params);
-    }
 
     public function user()
     {
@@ -35,18 +26,17 @@ class Event extends \Eloquent {
         return $results;
     }
 
-    public function addGuestsAsString($string)
+    public function setGuestsStringAttribute($string)
     {
         $this->save();
-
         $guests_strings = explode("\n", trim($string));
         $guests_strings = array_filter($guests_strings);
 
         foreach ($guests_strings as $guest_str) {
             $guest = new Guest;
             $guest->populateByString($guest_str);
+
             $this->guests()->save($guest);
-            $guests[] = $guest;
         }
     }
 
