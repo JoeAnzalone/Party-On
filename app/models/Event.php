@@ -96,4 +96,32 @@ class Event extends \Eloquent {
 
         return $url;
     }
+
+    public function getGoogleCalendarUrlAttribute()
+    {
+        $base_url  = 'https://www.google.com/calendar/render';
+
+        $start_date = date('Ymd', strtotime($this->start_time));
+        $start_time = date('His', strtotime($this->start_time));
+        $start_date_time = $start_date . 'T' . $start_time;
+
+        $end_date_time = $start_date_time;
+        if ($this->end_time) {
+            $end_date = date('Ymd', strtotime($this->end_time));
+            $end_time = date('His', strtotime($this->end_time));
+            $end_date_time = $end_date . 'T' . $end_time;
+        }
+
+        $options = [
+            'action'   => 'TEMPLATE',
+            'text'     => $this->title,
+            'details'  => $this->description,
+            'dates'    => $start_date_time . '/' . $end_date_time,
+            'location' => $this->location_address,
+        ];
+
+        $query_string = http_build_query($options);
+
+        return $base_url . '?' . $query_string;
+    }
 }

@@ -1,5 +1,6 @@
 <h1 class="title">{{ $event['title'] }}</h1>
 <div class="start_time">On {{ $event->nice_start_time }}</div>
+<div class="google-calendar-link">[<a href="{{ $event->google_calendar_url }}" target="_blank">Add to Google Calendar</a>]</div>
 
 @if (!empty($guest['key']))
     <div class="respond">
