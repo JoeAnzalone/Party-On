@@ -110,6 +110,30 @@ class EventsController extends \BaseController
         $this->layout->content = View::make('events.show', $data);
     }
 
+    public function showIcal($key)
+    {
+        $guest = Guest::where('key', $key)->firstOrFail();
+        $event = $guest->event;
+
+        $event->guests->each(function ($item) {
+            unset($item->key);
+        });
+
+        $data = [
+            'guest' => $guest,
+            'event' => $event,
+        ];
+
+        $host = new Guest();
+        $host->fill(['name' => $event->user->name, 'email' => $event->user->email, 'response' => 'yes']);
+        $data['event']->guests->prepend($host);
+
+        $response = Response::view('events.show_ical', $data);
+        $response->header('Content-Type', 'text/calendar');
+        $response->header('Content-Disposition', 'attachment; filename="' . $event->slug . '"');
+        return $response;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
