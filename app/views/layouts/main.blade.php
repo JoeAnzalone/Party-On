@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Party On!</title>
+    <title>{{ $title or 'Party On!' }}</title>
     <meta name="viewport" content="width=device-width">
     {{ $styles }}
 </head>

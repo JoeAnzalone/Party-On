@@ -82,6 +82,7 @@ class EventsController extends \BaseController
         $host = new Guest();
         $host->fill(['name' => $event->user->name, 'email' => $event->user->email, 'response' => 'yes']);
         $data['event']->guests->prepend($host);
+        $this->layout->title = $event->title;
         $this->layout->content = View::make('events.show', $data);
     }
 
@@ -107,6 +108,7 @@ class EventsController extends \BaseController
         $host = new Guest();
         $host->fill(['name' => $event->user->name, 'email' => $event->user->email, 'response' => 'yes']);
         $data['event']->guests->prepend($host);
+        $this->layout->title = $event->title;
         $this->layout->content = View::make('events.show', $data);
     }
 
@@ -143,6 +145,7 @@ class EventsController extends \BaseController
     public function edit($id)
     {
         $event = Event::find($id);
+        $this->layout->title = 'Edit: ' . $event->title;
         $this->layout->content = View::make('events.edit', ['event' => $event]);
     }
 
