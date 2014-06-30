@@ -54,3 +54,8 @@
             </ul>
         @endforeach
 @endif
+
+
+@if (Sentry::getUser() && Sentry::getUser()->id === $event->user_id)
+    {{ link_to_route('event.edit', 'Edit', $event->id, ['class' => 'edit-link']) }}
+@endif
