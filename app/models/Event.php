@@ -92,7 +92,6 @@ class Event extends \Eloquent {
     {
         $url  = 'https://www.google.com/maps/search/';
         $url .=  urlencode($this->location_address);
-        $url .= !empty($this->location_name) ? ' (' . urlencode($this->location_name) . ')' : '';
 
         return $url;
     }
