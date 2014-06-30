@@ -2,8 +2,8 @@
     text-decoration: none;
 }
 
-.location a:hover,
-.location a:focus {
+.location > a:hover,
+.location > a:focus {
     text-decoration: underline;
 }
 
