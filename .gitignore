@@ -2,7 +2,8 @@
 /vendor
 composer.phar
 composer.lock
-app/config/local
+app/config/local/*
+!app/config/local/*.sample
 app/views/_analytics.blade.php
 .env.*.php
 .env.php
