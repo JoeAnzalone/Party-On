@@ -18,7 +18,7 @@ class UsersController extends \BaseController
             );
         }
 
-        return Redirect::to(route('event.mine'))->with(
+        return Redirect::intended(route('event.mine'))->with(
             'flash',
             ['class' => 'success', 'message' => "Welcome back!"]
         );
